@@ -3,6 +3,7 @@
 		DROP TABLE IF EXISTS _blog_article ;
 		CREATE TABLE _blog_article (ID_article INT  AUTO_INCREMENT NOT NULL,
 		title VARCHAR(50),
+		url VARCHAR(255),
 		article TEXT,
 		publication_date DATETIME,
 		ID_identite INT,
