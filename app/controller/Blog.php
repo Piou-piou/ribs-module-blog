@@ -18,14 +18,16 @@
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		public static function getConfiguration() {
-			$dbc = App::getDb();
-			
-			$query = $dbc->select()->from("_blog_configuration")->where("ID_configuration", "=", 1)->get();
-			
-			foreach ($query as $obj) {
-				self::$force_login_comment = $obj->force_login_comment;
-				self::$article_index = $obj->article_index;
-				self::$validate_comment = $obj->validate_comment;
+			if (self::$force_login_comment == null) {
+				$dbc = App::getDb();
+				
+				$query = $dbc->select()->from("_blog_configuration")->where("ID_configuration", "=", 1)->get();
+				
+				foreach ($query as $obj) {
+					self::$force_login_comment = $obj->force_login_comment;
+					self::$article_index = $obj->article_index;
+					self::$validate_comment = $obj->validate_comment;
+				}
 			}
 		}
 		//-------------------------- END GETTER ----------------------------------------------------------------------------//
