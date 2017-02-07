@@ -1,1 +1,11 @@
 {#this page show only last articles ordered by date_creation#}
+{% for i in blog %}
+	<article>
+		<h2>{{ i.title }}</h2>
+		<h3>{{ i.publication_date }}</h3>
+		
+		{{ i.article }}
+		
+		<a href="{{ BLOGWEBROOT }}article/url-article">Lire la suite</a>
+	</article>
+{% endfor %}
