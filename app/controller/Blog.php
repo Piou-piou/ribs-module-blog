@@ -8,6 +8,7 @@
 		private static $force_login_comment;
 		private static $article_index;
 		private static $validate_comment;
+		public static $parametre_router;
 		
 		//-------------------------- BUILDER ----------------------------------------------------------------------------//
 		public function __construct() {
@@ -50,7 +51,8 @@
 		 */
 		public static function getArticleIndex() {
 			if (self::$article_index == null) {
-				self::getConfiguration();
+				Blog::getConfiguration();
+				
 			}
 			
 			return self::$article_index;

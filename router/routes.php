@@ -1,6 +1,7 @@
 <?php
 	$pages_blog = [
 		"index",
+		"article"
 	];
 	
 	if (\core\modules\GestionModule::getModuleActiver("blog")) {
@@ -11,6 +12,11 @@
 		
 		if ($this->page == "index") {
 			$this->controller = "blog/app/controller/initialise/index.php";
+		}
+		
+		if ($this->page == "article") {
+			\modules\blog\app\controller\Blog::$parametre_router = $this->parametre;
+			$this->controller = "blog/app/controller/initialise/article.php";
 		}
 	}
 	else {
