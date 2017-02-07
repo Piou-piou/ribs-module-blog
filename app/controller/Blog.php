@@ -20,7 +20,7 @@
 		/**
 		 * this function load the configuration of the blog
 		 */
-		public static function getConfiguration() {
+		private static function getConfiguration() {
 			$dbc = App::getDb();
 			
 			$query = $dbc->select()->from("_blog_configuration")->where("ID_configuration", "=", 1)->get();
