@@ -9,7 +9,7 @@
 			header("location:".WEBROOT);
 		}
 		
-		if ($page == "index") {
+		if ($this->page == "index") {
 			$this->controller = "blog/app/controller/initialise/index.php";
 		}
 	}
