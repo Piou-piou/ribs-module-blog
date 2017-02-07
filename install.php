@@ -37,5 +37,3 @@
 	
 		INSERT INTO `_blog_state` (`ID_state`, `state`) VALUES (NULL, 'publish'), (NULL, 'draft'), (NULL, 'replay'), (NULL, 'trash');
 	";
-?>
-

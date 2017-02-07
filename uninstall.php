@@ -6,4 +6,3 @@
 		DROP TABLE _blog_etat;
 		DROP TABLE _blog_article_categorie;
 	";
-?>
