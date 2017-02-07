@@ -31,6 +31,7 @@
 					$articles[] = [
 						"id_article" => $obj->ID_article,
 						"title" => $obj->title,
+						"url" => $obj->url,
 						"article" => $obj->article,
 						"publication_date" => $obj->publication_date
 					];
