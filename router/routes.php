@@ -1,7 +1,8 @@
 <?php
 	$pages_blog = [
 		"index",
-		"article"
+		"article",
+		"category"
 	];
 	
 	if (\core\modules\GestionModule::getModuleActiver("blog")) {
@@ -15,8 +16,13 @@
 		}
 		
 		if ($this->page == "article") {
-			\modules\blog\app\controller\Blog::$parametre_router = $this->parametre;
+			\modules\blog\app\controller\Blog::$router_parameter = $this->parametre;
 			$this->controller = "blog/app/controller/initialise/article.php";
+		}
+		
+		if ($this->page == "category") {
+			\modules\blog\app\controller\Blog::$router_parameter = $this->parametre;
+			$this->controller = "blog/app/controller/initialise/category.php";
 		}
 	}
 	else {

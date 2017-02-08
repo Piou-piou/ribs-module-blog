@@ -21,7 +21,9 @@
 		public function getCategoryArticle($id_article = null) {
 			$dbc = App::getDb();
 			
-			if ($id_article === null) $id_article = Blog::$parametre_router;
+			if ($id_article === null) {
+				$id_article = Blog::$router_parameter;
+			}
 			
 			$query = $dbc->select()
 				->from("_blog_article")

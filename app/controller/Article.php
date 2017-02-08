@@ -22,7 +22,7 @@
 			$dbc = App::getDb();
 			$nb_article = Blog::getArticleIndex();
 			
-			$query = $dbc->select()->from("_blog_article")->limit(0,$nb_article)->get();
+			$query = $dbc->select()->from("_blog_article")->limit(0, $nb_article)->get();
 			
 			if ((is_array($query)) && (count($query) > 0)) {
 				$articles = [];
@@ -42,9 +42,12 @@
 			}
 		}
 		
+		/**
+		 * function that get one article
+		 */
 		public function getArticle() {
 			$dbc = App::getDb();
-			$param = Blog::$parametre_router;
+			$param = Blog::$router_parameter;
 			
 			$query = $dbc->select()->from("_blog_article")
 				->where("ID_article", "=", $param, "OR")
@@ -62,6 +65,38 @@
 						"categories" => Blog::getCategory()->getCategoryArticle()
 					]]);
 				}
+			}
+		}
+		
+		public function getCategoryArticle() {
+			$dbc = App::getDb();
+			$category = Blog::$router_parameter;
+			
+			$query = $dbc->select()
+				->from("_blog_article")
+				->from("_blog_category")
+				->from("_blog_article_category")
+				->where("_blog_category.ID_category", "=", $category, "OR")
+				->where("_blog_category.category", "=", $category, "AND")
+				->where("_blog_article_category.ID_article", "=", "_blog_article.ID_article", "AND", true)
+				->where("_blog_article_category.ID_category", "=", "_blog_category.ID_category", "", true)
+				->get();
+			
+			if ((is_array($query)) && (count($query) > 0)) {
+				$articles = [];
+				
+				foreach ($query as $obj) {
+					$articles[] = [
+						"id_article" => $obj->ID_article,
+						"title" => $obj->title,
+						"url" => $obj->url,
+						"article" => $obj->article,
+						"publication_date" => $obj->publication_date,
+						"categories" => Blog::getCategory()->getCategoryArticle($obj->url)
+					];
+				}
+				
+				Blog::setValues(["articles" => $articles]);
 			}
 		}
 		//-------------------------- END GETTER ----------------------------------------------------------------------------//

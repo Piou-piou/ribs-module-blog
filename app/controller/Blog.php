@@ -10,7 +10,7 @@
 		private static $validate_comment;
 		private static $category;
 		
-		public static $parametre_router;
+		public static $router_parameter;
 		
 		private static $values = [];
 		
