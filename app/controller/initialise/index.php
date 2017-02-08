@@ -2,4 +2,4 @@
 	$blog = new \modules\blog\app\controller\Article();
 	$blog->getLastArticle();
 	
-	$arr = \core\App::getValues();
+	$arr = \modules\blog\app\controller\Blog::getValues();

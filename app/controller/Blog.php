@@ -8,7 +8,11 @@
 		private static $force_login_comment;
 		private static $article_index;
 		private static $validate_comment;
+		private static $category;
+		
 		public static $parametre_router;
+		
+		private static $values = [];
 		
 		//-------------------------- BUILDER ----------------------------------------------------------------------------//
 		public function __construct() {
@@ -18,6 +22,14 @@
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
+		/**
+		 * @return array
+		 * get array of all values wich will be used in the page
+		 */
+		public static function getValues() {
+			return ["blog" => self::$values];
+		}
+		
 		/**
 		 * this function load the configuration of the blog
 		 */
@@ -70,9 +82,24 @@
 			
 			return self::$validate_comment;
 		}
+		
+		public static function getCategory() {
+			if (self::$category == null) {
+				self::$category = new Category();
+			}
+			
+			return self::$category;
+		}
 		//-------------------------- END GETTER ----------------------------------------------------------------------------//
 		
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
+		/**
+		 * @param $values
+		 * can set values while keep older infos
+		 */
+		public static function setValues($values) {
+			Blog::$values = array_merge(Blog::$values, $values);
+		}
 		//-------------------------- END SETTER ----------------------------------------------------------------------------//    
 	}

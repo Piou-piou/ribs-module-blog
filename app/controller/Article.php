@@ -33,11 +33,12 @@
 						"title" => $obj->title,
 						"url" => $obj->url,
 						"article" => $obj->article,
-						"publication_date" => $obj->publication_date
+						"publication_date" => $obj->publication_date,
+						"categories" => Blog::getCategory()->getCategoryArticle($obj->url)
 					];
 				}
 				
-				App::setValues(["blog" => $articles]);
+				Blog::setValues(["articles" => $articles]);
 			}
 		}
 		
@@ -52,12 +53,13 @@
 			
 			if ((is_array($query)) && (count($query) == 1)) {
 				foreach ($query as $obj) {
-					App::setValues(["blog" => [
+					Blog::setValues(["article" => [
 						"id_article" => $obj->ID_article,
 						"title" => $obj->title,
 						"url" => $obj->url,
 						"article" => $obj->article,
-						"publication_date" => $obj->publication_date
+						"publication_date" => $obj->publication_date,
+						"categories" => Blog::getCategory()->getCategoryArticle()
 					]]);
 				}
 			}

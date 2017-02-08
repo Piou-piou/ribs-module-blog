@@ -1,6 +1,13 @@
 {#this page display one article#}
 <article>
-	<h2>{{ blog.title }}</h2>
-	<h3>{{ blog.publication_date }}</h3>
-	{{ blog.article }}
+	<h2>{{ blog.article.title }}</h2>
+	<h3>{{ blog.article.publication_date }}</h3>
+	
+	<ul>
+		{% for i in blog.article.categories %}
+			<li>{{ i.category }}</li>
+		{% endfor %}
+	</ul>
+	
+	{{ blog.article.article }}
 </article>

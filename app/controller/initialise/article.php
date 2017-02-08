@@ -5,8 +5,4 @@
 	$category = new \modules\blog\app\controller\Category();
 	$category->getCategoryArticle();
 	
-	$arr = \core\App::getValues();
-	
-	echo("<pre>");
-	print_r($arr);
-	echo("</pre>");
+	$arr = \modules\blog\app\controller\Blog::getValues();

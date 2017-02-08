@@ -1,8 +1,14 @@
 {#this page show only last articles ordered by date_creation#}
-{% for i in blog %}
+{% for i in blog.articles %}
 	<article>
 		<h2>{{ i.title }}</h2>
 		<h3>{{ i.publication_date }}</h3>
+		
+		<ul>
+			{% for x in i.categories %}
+				<li>{{ x.category }}</li>
+			{% endfor %}
+		</ul>
 		
 		{{ i.article }}
 		

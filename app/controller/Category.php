@@ -18,15 +18,17 @@
 		/**
 		 * get all categories of an article
 		 */
-		public function getCategoryArticle() {
+		public function getCategoryArticle($id_article = null) {
 			$dbc = App::getDb();
+			
+			if ($id_article === null) $id_article = Blog::$parametre_router;
 			
 			$query = $dbc->select()
 				->from("_blog_article")
 				->from("_blog_category")
 				->from("_blog_article_category")
-				->where("_blog_article.ID_article", "=", Blog::$parametre_router, "OR")
-				->where("_blog_article.url", "=", Blog::$parametre_router, "AND")
+				->where("_blog_article.ID_article", "=", $id_article, "OR")
+				->where("_blog_article.url", "=", $id_article, "AND")
 				->where("_blog_article_category.ID_article", "=", "_blog_article.ID_article", "AND", true)
 				->where("_blog_article_category.ID_category", "=", "_blog_category.ID_category", "", true)
 				->get();
@@ -34,13 +36,13 @@
 			if ((is_array($query)) && (count($query) > 0)) {
 				$categories = [];
 				foreach ($query as $obj) {
-					$categories = [
+					$categories[] = [
 						"id_category" => $obj->ID_category,
 						"category" => $obj->category
 					];
 				}
 				
-				App::setValues(["categories" => $categories]);
+				return $categories;
 			}
 		}
 		//-------------------------- END GETTER ----------------------------------------------------------------------------//
