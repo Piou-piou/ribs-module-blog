@@ -15,3 +15,12 @@
 		<a href="{{ WEBROOT }}blog/article/{{ i.url }}">Lire la suite</a>
 	</article>
 {% endfor %}
+
+{% if blog.categories_listis iterable %}
+	<h3>Categories list</h3>
+	<ul>
+		{% for i in blog.categories_list %}
+			<li><a href="{{ WEBROOT }}blog/category/{{ i.category }}">{{ i.category }}</a></li>
+		{% endfor %}
+	</ul>
+{% endif %}

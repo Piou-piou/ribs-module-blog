@@ -9,7 +9,21 @@
 		
 		//-------------------------- BUILDER ----------------------------------------------------------------------------//
 		public function __construct() {
+			$dbc = App::getDb();
 			
+			$query = $dbc->select()->from("_blog_category")->get();
+			
+			if ((is_array($query)) && (count($query) > 0)) {
+				$categories = [];
+				
+				foreach ($query as $obj) {
+					$categories[] = [
+						"category" => $obj->category
+					];
+				}
+				
+				Blog::setValues(["categories_list" => $categories]);
+			}
 		}
 		//-------------------------- END BUILDER ----------------------------------------------------------------------------//
 		
