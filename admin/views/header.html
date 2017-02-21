@@ -1,0 +1,55 @@
+<header>
+    <div class="inner">
+        <h1>Gestion du blog</h1>
+    </div>
+</header>
+<nav class="nav-page">
+	<div class="inner">
+		<ul>
+			<li><a href="">Articles</a>
+				<ul>
+					<li><a href="{{ ADMWEBROOT }}modules/blog/add-article">Ajouter un article</a></li>
+					<li><a href="{{ ADMWEBROOT }}modules/blog">Modifier un article</a></li>
+					<li><a href="{{ ADMWEBROOT }}modules/blog">Lister tous les articles</a></li>
+				</ul>
+			</li>
+			<li><a href="">Catégories</a>
+				<ul>
+					<li><a href="">Ajouter une catégorie</a></li>
+					<li><a href="">Modifier une catégorie</a></li>
+					<li><a href="">Lister toutes les catégories</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+<div class="popup" id="popup-delete">
+    <div class="content">
+        <h2>Etes-vous sûr de vouloir supprimer cet article ?</h2>
+        <p>Si vous le supprimé, tous les commentaires qui y sont associés seront supprimés ainsi que l'article et son contenu textuel.<br/>
+           Les images qui le compose seront quant à elle sauvegardées.
+        </p>
+        
+        <div class="lien">
+            <a class="annuler">Annuler</a>
+            <a href="" class="valider">Valider</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="popup" id="popup-delete-1">
+    <div class="content">
+        <h2>Etes-vous sûr de vouloir supprimer cette catégorie ?</h2>
+        <p>Si vous la supprimée, tous les articles qui y sont associés ne le seront plus.<br/>
+        </p>
+        
+        <div class="lien">
+            <a class="annuler">Annuler</a>
+            <a href="" class="valider">Valider</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

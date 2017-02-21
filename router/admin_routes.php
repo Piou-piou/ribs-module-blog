@@ -1,7 +1,8 @@
 <?php
 	$pages_blog = [
 		"index",
-		"article",
+		"add-article",
+		"edit-article",
 		"category"
 	];
 	
@@ -15,7 +16,12 @@
 			$this->controller = "blog/admin/controller/initialise/index.php";
 		}
 		
-		if ($this->page == "article") {
+		if ($this->page == "add-article") {
+			//$this->controller = "blog/admin/controller/initialise/index.php";
+		}
+		
+		if ($this->page == "edit-article") {
+			$this->controller = "blog/admin/controller/initialise/index.php";
 		}
 		
 		if ($this->page == "category") {

@@ -1,9 +1,4 @@
-<header>
-    <div class="inner">
-        <h1>Gestion du blog : </h1>
-        <h2>Liste des derniers articles</h2>
-    </div>
-</header>
+{% include("header.html") %}
 
 <div class="inner">
 	<div class="added-module">
@@ -25,8 +20,8 @@
 				
 				<h4><i class="fa fa-comments animated activate swing infinite"></i>20commentaires</h4>
 				
-				<a class="modifier" href="{{ WEBROOT }}blog/article/{{ i.url }}">Modifier l'article</a>
-				<a class="commentaire" href="{{ WEBROOT }}blog/article/{{ i.url }}">Gestion commentaires</a>
+				<a class="modifier" href="{{ ADMWEBROOT }}modules/blog/edit-article/{{ i.url }}">Modifier l'article</a>
+				<a class="commentaire" href="{{ ADMWEBROOT }}modules/blog/edit-article/{{ i.url }}">Gestion commentaires</a>
 				<a class="supprimer" href="">Supprimer l'article</a>
 			</div>
 		{% endfor %}
