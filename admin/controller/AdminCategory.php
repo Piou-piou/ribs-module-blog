@@ -2,8 +2,8 @@
 	namespace modules\blog\admin\controller;
 	
 	
-	class AdminBlog {
-		private static $admin_category;
+	class AdminCategory {
+		
 		
 		//-------------------------- BUILDER ----------------------------------------------------------------------------//
 		public function __construct() {
@@ -13,13 +13,6 @@
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
-		public function getAdminCategory() {
-			if (self::$admin_category == null) {
-				self::$admin_category = new AdminCategory();
-			}
-			
-			return self::$admin_category;
-		}
 		//-------------------------- END GETTER ----------------------------------------------------------------------------//
 		
 		
