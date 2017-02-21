@@ -2,7 +2,7 @@
 {% for i in blog.articles %}
 	<article>
 		<h2>{{ i.title }}</h2>
-		<h3>{{ i.publication_date }}</h3>
+		<h3>{{ i.publication_date }} posté par {{ i.pseudo }}</h3>
 		
 		<ul>
 			{% for x in i.categories %}

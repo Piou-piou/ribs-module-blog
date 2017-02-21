@@ -22,7 +22,11 @@
 			$dbc = App::getDb();
 			$nb_article = Blog::getArticleIndex();
 			
-			$query = $dbc->select()->from("_blog_article")->limit(0, $nb_article)->get();
+			$query = $dbc->select()
+				->from("_blog_article")
+				->from("identite")
+				->where("_blog_article.ID_identite", "=", "identite.ID_identite", "", true)
+				->limit(0, $nb_article)->get();
 			
 			if ((is_array($query)) && (count($query) > 0)) {
 				$articles = [];
@@ -33,6 +37,7 @@
 						"title" => $obj->title,
 						"url" => $obj->url,
 						"article" => $obj->article,
+						"pseudo" => $obj->pseudo,
 						"publication_date" => $obj->publication_date,
 						"categories" => Blog::getCategory()->getCategoryArticle($obj->url)
 					];
@@ -49,9 +54,10 @@
 			$dbc = App::getDb();
 			$param = Blog::$router_parameter;
 			
-			$query = $dbc->select()->from("_blog_article")
+			$query = $dbc->select()->from("_blog_article")->from("identite")
 				->where("ID_article", "=", $param, "OR")
-				->where("url", "=", $param)
+				->where("url", "=", $param, "AND")
+				->where("_blog_article.ID_identite", "=", "identite.ID_identite", "", true)
 				->get();
 			
 			if ((is_array($query)) && (count($query) == 1)) {
@@ -61,6 +67,7 @@
 						"title" => $obj->title,
 						"url" => $obj->url,
 						"article" => $obj->article,
+						"pseudo" => $obj->pseudo,
 						"publication_date" => $obj->publication_date,
 						"categories" => Blog::getCategory()->getCategoryArticle()
 					]]);
@@ -76,10 +83,12 @@
 				->from("_blog_article")
 				->from("_blog_category")
 				->from("_blog_article_category")
+				->from("identite")
 				->where("_blog_category.ID_category", "=", $category, "OR")
 				->where("_blog_category.category", "=", $category, "AND")
 				->where("_blog_article_category.ID_article", "=", "_blog_article.ID_article", "AND", true)
-				->where("_blog_article_category.ID_category", "=", "_blog_category.ID_category", "", true)
+				->where("_blog_article_category.ID_category", "=", "_blog_category.ID_category", "AND", true)
+				->where("_blog_article.ID_identite", "=", "identite.ID_identite", "", true)
 				->get();
 			
 			if ((is_array($query)) && (count($query) > 0)) {
@@ -91,6 +100,7 @@
 						"title" => $obj->title,
 						"url" => $obj->url,
 						"article" => $obj->article,
+						"pseudo" => $obj->pseudo,
 						"publication_date" => $obj->publication_date,
 						"categories" => Blog::getCategory()->getCategoryArticle($obj->url)
 					];
