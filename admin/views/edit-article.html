@@ -1,38 +1,43 @@
 {% include("header.html") %}
 
-<div class="inner">
-	<section class="contenu modifier-contenu">
-		<h2>Titre de l'article</h2>
-		<div class="bloc">
-			<label class="label" for="title"  data-error="Le titre de l'article doit être entre 4 et 20 caractères">Titre de l'article</label>
-			<input type="text" name="title" type-val="string" min="4" max="20" required=""/>
-		</div>
-	</section>
+<form action="">
+	<input class="submit-contenu" type="submit" value="Ajouter l'article">
 	
-	<section class="contenu modifier-contenu">
-		<h2>Catégories de l'article</h2>
+	<div class="inner">
+		<section class="contenu modifier-contenu">
+			<h2>Titre de l'article</h2>
+			<div class="bloc">
+				<label class="label" for="title"  data-error="Le titre de l'article doit être entre 4 et 20 caractères">Titre de l'article</label>
+				<input type="text" name="title" type-val="string" min="4" max="20" required=""/>
+			</div>
+		</section>
 		
-		<div class="espacement"></div>
+		<section class="contenu modifier-contenu">
+			<h2>Catégories de l'article</h2>
+			
+			<div class="espacement"></div>
+			
+			Devblog
+			<input type="checkbox" name="categories[]">
+			ACS
+			<input type="checkbox" name="categories[]">
+			Veille
+			<input type="checkbox" name="categories[]">
+		</section>
 		
-		Devblog
-		<input type="checkbox" name="categories[]">
-		ACS
-		<input type="checkbox" name="categories[]">
-		Veille
-		<input type="checkbox" name="categories[]">
-	</section>
+		<section class="contenu modifier-contenu">
+			<h2>Contenu de votrte article</h2>
+			<script src="{{ LIBSWEBROOT }}ckeditor/ckeditor.js"></script>
+			<script src="{{ WEBROOT }}config/config_ckeditor.js"></script>
+			<script>
+                $(document).ready(function() {
+                    CKEDITOR.replaceClass = 'ckeditor';
+                });
+			</script>
+			<div class="bloc">
+				<textarea name="article" id="" cols="30" rows="10" class="ckeditor"></textarea>
+			</div>
+		</section>
 	
-	<section class="contenu modifier-contenu">
-		<h2>Contenu de votrte article</h2>
-		<script src="{{ LIBSWEBROOT }}ckeditor/ckeditor.js"></script>
-		<script src="{{ WEBROOT }}config/config_ckeditor.js"></script>
-		<script>
-            $(document).ready(function() {
-                CKEDITOR.replaceClass = 'ckeditor';
-            });
-		</script>
-		<div class="bloc">
-			<textarea name="article" id="" cols="30" rows="10" class="ckeditor"></textarea>
-		</div>
-	</section>
-</div>
+	</div>
+</form>

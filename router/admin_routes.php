@@ -16,12 +16,9 @@
 			$this->controller = "blog/admin/controller/initialise/index.php";
 		}
 		
-		if ($this->page == "add-article") {
-			//$this->controller = "blog/admin/controller/initialise/index.php";
-		}
-		
 		if ($this->page == "edit-article") {
-			$this->controller = "blog/admin/controller/initialise/index.php";
+			\modules\blog\app\controller\Blog::$router_parameter = $this->parametre;
+			$this->controller = "blog/admin/controller/initialise/article.php";
 		}
 		
 		if ($this->page == "category") {
