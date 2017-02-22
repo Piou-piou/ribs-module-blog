@@ -5,6 +5,7 @@
 	use core\App;
 	use core\functions\ChaineCaractere;
 	use core\HTML\flashmessage\FlashMessage;
+	use modules\blog\app\controller\Blog;
 	
 	class AdminArticle {
 		private $error_title;
@@ -58,6 +59,37 @@
 			}
 			
 			return true;
+		}
+		
+		/**
+		 * this function get last articles
+		 */
+		public function getAllArticle() {
+			$dbc = App::getDb();
+			
+			$query = $dbc->select()
+				->from("_blog_article")
+				->from("identite")
+				->where("_blog_article.ID_identite", "=", "identite.ID_identite", "", true)
+				->get();
+			
+			if ((is_array($query)) && (count($query) > 0)) {
+				$articles = [];
+				
+				foreach ($query as $obj) {
+					$articles[] = [
+						"id_article" => $obj->ID_article,
+						"title" => $obj->title,
+						"url" => $obj->url,
+						"article" => $obj->article,
+						"pseudo" => $obj->pseudo,
+						"publication_date" => $obj->publication_date,
+						"categories" => Blog::getCategory()->getCategoryArticle($obj->url)
+					];
+				}
+				
+				Blog::setValues(["articles" => $articles]);
+			}
 		}
 		//-------------------------- END GETTER ----------------------------------------------------------------------------//
 		

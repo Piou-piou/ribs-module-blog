@@ -1,6 +1,6 @@
 <?php
-	$blog = new \modules\blog\app\controller\Article();
-	$blog->getLastArticle();
+	$blog = new \modules\blog\admin\controller\AdminArticle();
+	$blog->getAllArticle();
 	
 	$category = new \modules\blog\app\controller\Category();
 	
