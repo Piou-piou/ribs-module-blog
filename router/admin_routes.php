@@ -21,7 +21,8 @@
 			$this->controller = "blog/admin/controller/initialise/article.php";
 		}
 		
-		if ($this->page == "category") {
+		if ($this->page == "add-article") {
+			$this->controller = "blog/admin/controller/initialise/get_list_categories.php";
 		}
 	}
 	else {

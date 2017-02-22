@@ -24,6 +24,8 @@
 		 * function that verify if title of the article is ok
 		 */
 		private function getTestTitle($title) {
+			$dbc = App::getDb();
+			
 			if (ChaineCaractere::testMinLenght($title, 4) == false) {
 				$this->error_title = "votre titre doit être supérieur à 4 caractères";
 				return false;
@@ -31,6 +33,13 @@
 			
 			if (strlen($title) > 20) {
 				$this->error_title = "votre titre ne doit pas eccéder 20 caractères";
+				return false;
+			}
+			
+			$query = $dbc->select()->from("_blog_article")->where("title", "=", $title)->get();
+			
+			if (count($query) > 0) {
+				$this->error_title = "votre titre existe déjà merci d'en choisir un autre";
 				return false;
 			}
 			
@@ -54,6 +63,14 @@
 		
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
+		/**
+		 * @param $title
+		 * @param $categories
+		 * @param $article
+		 * @param $state
+		 * @return bool
+		 * function to add an article and his categories
+		 */
 		public function setAddArticle($title, $categories, $article, $state) {
 			$dbc = App::getDb();
 			
@@ -69,6 +86,11 @@
 				->insert("ID_identite", $_SESSION['idlogin'.CLEF_SITE])
 				->insert("ID_state", $state)
 				->into("_blog_article")->set();
+			
+			$id_article = $dbc->lastInsertId();
+			
+			AdminBlog::getAdminCategory()->setCategoriesArticle($categories, $id_article);
+			return true;
 		}
 		//-------------------------- END SETTER ----------------------------------------------------------------------------//
 	}

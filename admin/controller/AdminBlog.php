@@ -13,7 +13,7 @@
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
-		public function getAdminCategory() {
+		public static function getAdminCategory() {
 			if (self::$admin_category == null) {
 				self::$admin_category = new AdminCategory();
 			}

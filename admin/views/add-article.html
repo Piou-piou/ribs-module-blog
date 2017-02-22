@@ -8,7 +8,7 @@
 				<h2>Titre de l'article</h2>
 				<div class="bloc">
 					<label class="label" for="title"  data-error="Le titre de l'article doit être entre 4 et 20 caractères">Titre de l'article</label>
-					<input type="text" name="title" type-val="string" min="4" max="20" required=""/>
+					<input type="text" name="title" type-val="string" min="4" max="20" value="{{ title }}" required=""/>
 				</div>
 			</div>
 			<div class="colonne">
@@ -28,12 +28,10 @@
 			
 			<div class="espacement"></div>
 			
-			Devblog
-			<input type="checkbox" name="categories[Devblog]">
-			ACS
-			<input type="checkbox" name="categories[acs]">
-			Veille
-			<input type="checkbox" name="categories[veille]">
+			{% for i in blog.categories_list %}
+				{{ i.category }}
+				<input type="checkbox" name="categories[]" value="{{ i.category }}">
+			{% endfor %}
 		</section>
 		
 		<section class="contenu modifier-contenu">
@@ -46,7 +44,9 @@
                 });
 			</script>
 			<div class="bloc">
-				<textarea name="article" id="" cols="30" rows="10" class="ckeditor"></textarea>
+				<textarea name="article" id="" cols="30" rows="10" class="ckeditor">
+					{{ article }}
+				</textarea>
 			</div>
 		</section>
 	
