@@ -1,14 +1,26 @@
 {% include("header.html") %}
 
-<form action="">
+<form action="{{ ADMWEBROOT }}controller/modules/blog/article/edit">
 	<input class="submit-contenu" type="submit" value="Modifier l'article">
 	
 	<div class="inner">
 		<section class="contenu modifier-contenu">
-			<h2>Titre de l'article</h2>
-			<div class="bloc">
-				<label class="label" for="title"  data-error="Le titre de l'article doit être entre 4 et 20 caractères">Titre de l'article</label>
-				<input type="text" name="title" type-val="string" min="4" max="20" required="" value="{{ blog.article.title }}"/>
+			<div class="colonne">
+				<h2>Titre de l'article</h2>
+				<div class="bloc">
+					<label class="label" for="title"  data-error="Le titre de l'article doit être entre 4 et 20 caractères">Titre de l'article</label>
+					<input type="text" name="title" type-val="string" min="4" max="20" required="" value="{{ blog.article.title }}"/>
+				</div>
+			</div>
+			<div class="colonne">
+				<h2>Etat de l'article</h2>
+				<div class="bloc">
+					<select name="state" id="" required>
+						<option value="">Selectionnez l'état de votre article</option>
+						<option value="1">Publié</option>
+						<option value="2">Brouillon</option>
+					</select>
+				</div>
 			</div>
 		</section>
 		
@@ -25,7 +37,6 @@
 					{% if i.category == x.category %}
 						{% set checked = "checked" %}
 					{% endif %}
-					
 				{% endfor %}
 				<input type="checkbox" name="categories[]" {{ checked }}>
 			{% endfor %}
@@ -48,4 +59,6 @@
 		</section>
 	
 	</div>
+	
+	<input type="hidden">
 </form>

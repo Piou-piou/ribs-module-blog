@@ -62,6 +62,23 @@
 		}
 		
 		/**
+		 * @param $id_article
+		 * @return bool
+		 * test if an article exist in bdd
+		 */
+		private function getTestArticleExist($id_article) {
+			$dbc = App::getDb();
+			
+			$query = $dbc->select()->from("_blog_article")->where("ID_article", "=", $id_article)->get();
+			
+			if (count($query) == 0) {
+				return false;
+			}
+			
+			return true;
+		}
+		
+		/**
 		 * this function get last articles
 		 */
 		public function getAllArticle() {
@@ -108,6 +125,41 @@
 			
 			if ($this->getTestTitle($title) == false || $this->getTestArticle($article) == false) {
 				FlashMessage::setFlash($this->error_title.$this->error_article);
+				return false;
+			}
+			
+			$dbc->insert("title", $title)
+				->insert("url", ChaineCaractere::setUrl($title))
+				->insert("publication_date", date("Y-m-d H:i:s"))
+				->insert("article", $article)
+				->insert("ID_identite", $_SESSION['idlogin'.CLEF_SITE])
+				->insert("ID_state", $state)
+				->into("_blog_article")->set();
+			
+			$id_article = $dbc->lastInsertId();
+			
+			AdminBlog::getAdminCategory()->setCategoriesArticle($categories, $id_article);
+			return true;
+		}
+		
+		/**
+		 * @param $title
+		 * @param $categories
+		 * @param $article
+		 * @param $state
+		 * @return bool
+		 * function to edit an article and his categories
+		 */
+		public function setEditArticle($title, $categories, $article, $state, $id_article) {
+			$dbc = App::getDb();
+			
+			if ($this->getTestTitle($title) == false || $this->getTestArticle($article) == false) {
+				FlashMessage::setFlash($this->error_title.$this->error_article);
+				return false;
+			}
+			
+			if ($this->getTestArticleExist($id_article) == false) {
+				FlashMessage::setFlash("votre article n'existe pas");
 				return false;
 			}
 			
