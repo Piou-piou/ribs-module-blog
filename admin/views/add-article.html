@@ -39,10 +39,12 @@
 		<section class="contenu modifier-contenu">
 			<h2>Contenu de votrte article</h2>
 			<script src="{{ LIBSWEBROOT }}ckeditor/ckeditor.js"></script>
+			<script src="{{ LIBSWEBROOT }}ckfinder/ckfinder.js"></script>
 			<script src="{{ WEBROOT }}config/config_ckeditor.js"></script>
 			<script>
                 $(document).ready(function() {
-                    CKEDITOR.replaceClass = 'ckeditor';
+                    var editor = CKEDITOR.replaceClass = 'ckeditor';
+                    CKFinder.setupCKEditor( editor, '/ckfinder/' );
                 });
 			</script>
 			<div class="bloc">
