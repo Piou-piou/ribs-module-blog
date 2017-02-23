@@ -54,10 +54,11 @@
 			$dbc = App::getDb();
 			$param = Blog::$router_parameter;
 			
-			$query = $dbc->select()->from("_blog_article")->from("identite")
+			$query = $dbc->select()->from("_blog_article")->from("identite")->from("_blog_state")
 				->where("ID_article", "=", $param, "OR")
 				->where("url", "=", $param, "AND")
-				->where("_blog_article.ID_identite", "=", "identite.ID_identite", "", true)
+				->where("_blog_article.ID_identite", "=", "identite.ID_identite", "AND", true)
+				->where("_blog_article.ID_state", "=", "_blog_state.ID_state", "", true)
 				->get();
 			
 			if ((is_array($query)) && (count($query) == 1)) {
@@ -68,6 +69,8 @@
 						"url" => $obj->url,
 						"article" => $obj->article,
 						"pseudo" => $obj->pseudo,
+						"id_state" => $obj->ID_state,
+						"state" => $obj->state,
 						"publication_date" => $obj->publication_date,
 						"categories" => Blog::getCategory()->getCategoryArticle()
 					]]);

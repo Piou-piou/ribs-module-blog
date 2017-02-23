@@ -1,6 +1,6 @@
 {% include("header.html") %}
 
-<form action="{{ ADMWEBROOT }}controller/modules/blog/article/edit">
+<form action="{{ ADMWEBROOT }}controller/modules/blog/article/edit" method="post">
 	<input class="submit-contenu" type="submit" value="Modifier l'article">
 	
 	<div class="inner">
@@ -17,8 +17,15 @@
 				<div class="bloc">
 					<select name="state" id="" required>
 						<option value="">Selectionnez l'état de votre article</option>
-						<option value="1">Publié</option>
-						<option value="2">Brouillon</option>
+						{% for i in blog.list_state %}
+							{% if blog.article.id_state == i.id_state %}
+								{% set selected = "selected" %}
+							{% else %}
+								{% set selected = "" %}
+							{% endif %}
+							<option value="{{ i.id_state }}" {{ selected }}>{{ i.state }}</option>
+						{% endfor %}
+					</select>
 					</select>
 				</div>
 			</div>

@@ -2,6 +2,7 @@
 
 <form action="{{ ADMWEBROOT }}controller/modules/blog/article/add" method="post">
 	<input class="submit-contenu" type="submit" value="Ajouter l'article">
+	
 	<div class="inner">
 		<section class="contenu modifier-contenu">
 			<div class="colonne">
@@ -16,8 +17,9 @@
 				<div class="bloc">
 					<select name="state" id="" required>
 						<option value="">Selectionnez l'état de votre article</option>
-						<option value="1">Publié</option>
-						<option value="2">Brouillon</option>
+						{% for i in blog.list_state %}
+							<option value="{{ i.id_state }}">{{ i.state }}</option>
+						{% endfor %}
 					</select>
 				</div>
 			</div>
