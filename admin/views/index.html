@@ -18,10 +18,10 @@
 				<h2>{{ i.title }}</h2>
 				<h3>{{ i.publication_date }} par {{ i.pseudo }}</h3>
 				
-				<h4><i class="fa fa-comments animated activate swing infinite"></i>20commentaires</h4>
+				{#<h4><i class="fa fa-comments animated activate swing infinite"></i>20commentaires</h4>#}
 				
 				<a class="modifier" href="{{ ADMWEBROOT }}modules/blog/edit-article/{{ i.url }}">Modifier l'article</a>
-				<a class="commentaire" href="{{ ADMWEBROOT }}modules/blog/edit-article/{{ i.url }}">Gestion commentaires</a>
+				{#<a class="commentaire" href="{{ ADMWEBROOT }}modules/blog/edit-article/{{ i.url }}">Gestion commentaires</a>#}
 				<a class="supprimer" href="">Supprimer l'article</a>
 			</div>
 		{% endfor %}
