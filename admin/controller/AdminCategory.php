@@ -55,5 +55,18 @@
 				}
 			}
 		}
+		
+		/**
+		 * @param $categories
+		 * @param $id_article
+		 * function to update catgories, in first step delete all categories and reinsert it after
+		 */
+		public function setUpdateCategoriesArticle($categories, $id_article) {
+			$dbc = App::getDb();
+			
+			$dbc->delete()->from("_blog_article_category")->where("ID_article", "=", $id_article)->del();
+			
+			$this->setCategoriesArticle($categories, $id_article);
+		}
 		//-------------------------- END SETTER ----------------------------------------------------------------------------//
 	}

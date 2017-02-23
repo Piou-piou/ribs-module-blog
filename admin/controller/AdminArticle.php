@@ -24,7 +24,7 @@
 		 * @return bool
 		 * function that verify if title of the article is ok
 		 */
-		private function getTestTitle($title) {
+		private function getTestTitle($title, $id_article=null) {
 			$dbc = App::getDb();
 			
 			if (ChaineCaractere::testMinLenght($title, 4) == false) {
@@ -37,7 +37,13 @@
 				return false;
 			}
 			
-			$query = $dbc->select()->from("_blog_article")->where("title", "=", $title)->get();
+			if ($id_article == null) {
+				$query = $dbc->select()->from("_blog_article")->where("title", "=", $title)->get();
+			}
+			else {
+				$query = $dbc->select()->from("_blog_article")
+					->where("title", "=", $title, "AND")->where("ID_article", "!=", $id_article)->get();
+			}
 			
 			if (count($query) > 0) {
 				$this->error_title = "votre titre existe déjà merci d'en choisir un autre";
@@ -153,7 +159,7 @@
 		public function setEditArticle($title, $categories, $article, $state, $id_article) {
 			$dbc = App::getDb();
 			
-			if ($this->getTestTitle($title) == false || $this->getTestArticle($article) == false) {
+			if ($this->getTestTitle($title, $id_article) == false || $this->getTestArticle($article) == false) {
 				FlashMessage::setFlash($this->error_title.$this->error_article);
 				return false;
 			}
@@ -163,17 +169,17 @@
 				return false;
 			}
 			
-			$dbc->insert("title", $title)
-				->insert("url", ChaineCaractere::setUrl($title))
-				->insert("publication_date", date("Y-m-d H:i:s"))
-				->insert("article", $article)
-				->insert("ID_identite", $_SESSION['idlogin'.CLEF_SITE])
-				->insert("ID_state", $state)
-				->into("_blog_article")->set();
+			$dbc->update("title", $title)
+				->update("url", ChaineCaractere::setUrl($title))
+				->update("publication_date", date("Y-m-d H:i:s"))
+				->update("article", $article)
+				->update("ID_identite", $_SESSION['idlogin'.CLEF_SITE])
+				->update("ID_state", $state)
+				->from("_blog_article")
+				->where("ID_article", "=", $id_article)
+				->set();
 			
-			$id_article = $dbc->lastInsertId();
-			
-			AdminBlog::getAdminCategory()->setCategoriesArticle($categories, $id_article);
+			AdminBlog::getAdminCategory()->setUpdateCategoriesArticle($categories, $id_article);
 			return true;
 		}
 		//-------------------------- END SETTER ----------------------------------------------------------------------------//

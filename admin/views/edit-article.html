@@ -45,7 +45,7 @@
 						{% set checked = "checked" %}
 					{% endif %}
 				{% endfor %}
-				<input type="checkbox" name="categories[]" {{ checked }}>
+				<input type="checkbox" name="categories[]" value="{{ i.category }}" {{ checked }}>
 			{% endfor %}
 		</section>
 		
@@ -67,5 +67,5 @@
 	
 	</div>
 	
-	<input type="hidden">
+	<input type="hidden" name="id_article" value="{{ blog.article.id_article }}">
 </form>
