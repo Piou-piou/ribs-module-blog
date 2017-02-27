@@ -5,6 +5,7 @@
 	use core\App;
 	use core\functions\ChaineCaractere;
 	use core\HTML\flashmessage\FlashMessage;
+	use Intervention\Image\ImageManager;
 	use modules\blog\app\controller\Blog;
 	
 	class AdminArticle {
@@ -27,7 +28,7 @@
 		private function getTestTitle($title, $id_article=null) {
 			$dbc = App::getDb();
 			
-			if (ChaineCaractere::testMinLenght($title, 4) == false) {
+			if (strlen($title) < 5){
 				$this->error_title = "votre titre doit être supérieur à 4 caractères";
 				return false;
 			}
@@ -130,6 +131,23 @@
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
 		/**
 		 * @param $title
+		 * function that add image to an article
+		 */
+		private function setImageArticle($title) {
+			if (!empty($_FILES['image']['tmp_name'])) {
+				$title_image = ChaineCaractere::setUrl($title);
+				
+				$name_image = ROOT."modules/blog/images/".$title_image.".png";
+				
+				$manager = new ImageManager();
+				$image = $manager->make($_FILES['image']['tmp_name']);
+				$image->crop(400, 400);
+				$image->save($name_image);
+			}
+		}
+		
+		/**
+		 * @param $title
 		 * @param $categories
 		 * @param $article
 		 * @param $state
@@ -143,6 +161,8 @@
 				FlashMessage::setFlash($this->error_title.$this->error_article);
 				return false;
 			}
+			
+			$this->setImageArticle($title);
 			
 			$dbc->insert("title", $title)
 				->insert("url", ChaineCaractere::setUrl($title))
