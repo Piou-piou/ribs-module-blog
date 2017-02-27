@@ -87,14 +87,24 @@
 		/**
 		 * this function get last articles
 		 */
-		public function getAllArticle() {
+		public function getAllArticle($id_state = null) {
 			$dbc = App::getDb();
 			
-			$query = $dbc->select()
-				->from("_blog_article")
-				->from("identite")
-				->where("_blog_article.ID_identite", "=", "identite.ID_identite", "", true)
-				->get();
+			if ($id_state === null) {
+				$query = $dbc->select()
+					->from("_blog_article")
+					->from("identite")
+					->where("_blog_article.ID_identite", "=", "identite.ID_identite", "", true)
+					->get();
+			}
+			else {
+				$query = $dbc->select()
+					->from("_blog_article")
+					->from("identite")
+					->where("_blog_article.ID_state", "=", $id_state, "AND")
+					->where("_blog_article.ID_identite", "=", "identite.ID_identite", "", true)
+					->get();
+			}
 			
 			if ((is_array($query)) && (count($query) > 0)) {
 				$articles = [];

@@ -1,5 +1,16 @@
 {% include("header.html") %}
 
+<nav class="nav-page">
+	<div class="inner">
+		<ul>
+			<li><a href="blog">Tous</a></li>
+			<li><a href="blog?id_state=1">Publié(s)</a></li>
+			<li><a href="blog?id_state=2">Brouillon(s)</a></li>
+			<li><a href="blog?id_state=4">Corbeille</a></li>
+		</ul>
+	</div>
+</nav>
+
 <div class="inner">
 	<div class="added-module">
 		{% for i in blog.articles %}

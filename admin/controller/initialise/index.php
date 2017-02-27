@@ -1,6 +1,6 @@
 <?php
 	$blog = new \modules\blog\admin\controller\AdminArticle();
-	$blog->getAllArticle();
+	$blog->getAllArticle($_GET['id_state']);
 	
 	$category = new \modules\blog\app\controller\Category();
 	
