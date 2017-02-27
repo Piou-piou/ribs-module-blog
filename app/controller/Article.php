@@ -25,6 +25,7 @@
 			$query = $dbc->select()
 				->from("_blog_article")
 				->from("identite")
+				->where("_blog_article.ID_state", "=", 1, "AND")
 				->where("_blog_article.ID_identite", "=", "identite.ID_identite", "", true)
 				->limit(0, $nb_article)->get();
 			
@@ -89,6 +90,7 @@
 				->from("identite")
 				->where("_blog_category.ID_category", "=", $category, "OR")
 				->where("_blog_category.category", "=", $category, "AND")
+				->where("_blog_article.ID_state", "=", 1, "AND")
 				->where("_blog_article_category.ID_article", "=", "_blog_article.ID_article", "AND", true)
 				->where("_blog_article_category.ID_category", "=", "_blog_category.ID_category", "AND", true)
 				->where("_blog_article.ID_identite", "=", "identite.ID_identite", "", true)
