@@ -1,6 +1,7 @@
 {#this page show only all articles of one category#}
 {% for i in blog.articles %}
 	<article>
+		<img src="{{ i.image }}" alt="Image article{{ i.title }} ">
 		<h2>{{ i.title }}</h2>
 		<h3>{{ i.publication_date }} posté par {{ i.pseudo }}</h3>
 		

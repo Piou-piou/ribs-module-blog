@@ -15,6 +15,17 @@
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
+		private function getImageArticle($url_article) {
+			$url_image = ROOT."modules/blog/images/".$url_article.".png";
+			
+			if (file_exists($url_image)) {
+				return WEBROOT."modules/blog/images/".$url_article.".png";;
+			}
+			else {
+				return WEBROOT."modules/blog/images/fond-bloc.jpg";
+			}
+		}
+		
 		/**
 		 * this function get last articles
 		 */
@@ -37,6 +48,7 @@
 						"id_article" => $obj->ID_article,
 						"title" => $obj->title,
 						"url" => $obj->url,
+						"image" => $this->getImageArticle($obj->url),
 						"article" => $obj->article,
 						"pseudo" => $obj->pseudo,
 						"publication_date" => $obj->publication_date,
@@ -79,6 +91,9 @@
 			}
 		}
 		
+		/**
+		 * function that get all categories of an article
+		 */
 		public function getCategoryArticle() {
 			$dbc = App::getDb();
 			$category = Blog::$router_parameter;
@@ -104,6 +119,7 @@
 						"id_article" => $obj->ID_article,
 						"title" => $obj->title,
 						"url" => $obj->url,
+						"image" => $this->getImageArticle($obj->url),
 						"article" => $obj->article,
 						"pseudo" => $obj->pseudo,
 						"publication_date" => $obj->publication_date,

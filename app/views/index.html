@@ -1,6 +1,7 @@
 {#this page show only last articles ordered by date_creation#}
 {% for i in blog.articles %}
 	<article>
+		<img src="{{ i.image }}" alt="Image article{{ i.title }} ">
 		<h2>{{ i.title }}</h2>
 		<h3>{{ i.publication_date }} posté par {{ i.pseudo }}</h3>
 		
