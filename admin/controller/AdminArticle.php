@@ -6,17 +6,13 @@
 	use core\functions\ChaineCaractere;
 	use core\HTML\flashmessage\FlashMessage;
 	use Intervention\Image\ImageManager;
+	use modules\blog\app\controller\Article;
 	use modules\blog\app\controller\Blog;
 	
-	class AdminArticle {
+	class AdminArticle extends Article {
 		private $error_title;
 		private $error_article;
 		
-		//-------------------------- BUILDER ----------------------------------------------------------------------------//
-		public function __construct() {
-			
-		}
-		//-------------------------- END BUILDER ----------------------------------------------------------------------------//
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
@@ -115,6 +111,7 @@
 						"id_article" => $obj->ID_article,
 						"title" => $obj->title,
 						"url" => $obj->url,
+						"image" => $this->getImageArticle($obj->url),
 						"article" => $obj->article,
 						"pseudo" => $obj->pseudo,
 						"publication_date" => $obj->publication_date,

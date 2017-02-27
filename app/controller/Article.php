@@ -15,7 +15,7 @@
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
-		private function getImageArticle($url_article) {
+		protected function getImageArticle($url_article) {
 			$url_image = ROOT."modules/blog/images/".$url_article.".png";
 			
 			if (file_exists($url_image)) {
