@@ -43,13 +43,13 @@
 			<script src="{{ WEBROOT }}config/config_ckeditor.js"></script>
 			<script>
                 $(document).ready(function() {
-                    var editor = CKEDITOR.replaceClass = 'ckeditor';
-                    CKFinder.setupCKEditor( editor, '/ckfinder/' );
+                    var editor = CKEDITOR.replace('article');
+                    CKFinder.setupCKEditor(editor, "/libs/ckfinder/");
                 });
 			</script>
 			<div class="bloc">
-				<textarea name="article" id="" cols="30" rows="10" class="ckeditor">
-					{{ article }}
+				<textarea name="article" id="article" cols="30" rows="10" class="article">
+					{{ blog.article.article }}
 				</textarea>
 			</div>
 		</section>

@@ -52,14 +52,16 @@
 		<section class="contenu modifier-contenu">
 			<h2>Contenu de votrte article</h2>
 			<script src="{{ LIBSWEBROOT }}ckeditor/ckeditor.js"></script>
+			<script src="{{ LIBSWEBROOT }}ckfinder/ckfinder.js"></script>
 			<script src="{{ WEBROOT }}config/config_ckeditor.js"></script>
 			<script>
                 $(document).ready(function() {
-                    CKEDITOR.replaceClass = 'ckeditor';
+                    var editor = CKEDITOR.replace('article');
+                    CKFinder.setupCKEditor(editor, "/libs/ckfinder/");
                 });
 			</script>
 			<div class="bloc">
-				<textarea name="article" id="" cols="30" rows="10" class="ckeditor">
+				<textarea name="article" id="article" cols="30" rows="10" class="article">
 					{{ blog.article.article }}
 				</textarea>
 			</div>
