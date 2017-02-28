@@ -3,8 +3,6 @@
 	
 	
 	use core\App;
-	use core\functions\ChaineCaractere;
-	use core\functions\DateHeure;
 	
 	class Article {
 		
@@ -26,6 +24,22 @@
 			else {
 				return WEBROOT."modules/blog/images/fond-bloc.jpg";
 			}
+		}
+		
+		/**
+		 * @param $date
+		 * @return string
+		 * function that return datein french format
+		 */
+		protected function getDateFr($date) {
+			$mois = array("Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre");
+			
+			$explode = explode("-", $date);
+			$jour_d = $explode[2];
+			$mois_d = $explode[1];
+			$annee_d = $explode[0];
+			
+			return $jour_d." ".$mois[$mois_d - 1]." ".$annee_d;
 		}
 		
 		/**
@@ -53,7 +67,7 @@
 						"image" => $this->getImageArticle($obj->url),
 						"article" => $obj->article,
 						"pseudo" => $obj->pseudo,
-						"publication_date" => DateHeure::date_fr_texte($obj->publication_date),
+						"publication_date" => $this->getDateFr($obj->publication_date),
 						"categories" => Blog::getCategory()->getCategoryArticle($obj->url)
 					];
 				}
@@ -86,7 +100,7 @@
 						"pseudo" => $obj->pseudo,
 						"id_state" => $obj->ID_state,
 						"state" => $obj->state,
-						"publication_date" => DateHeure::date_fr_texte($obj->publication_date),
+						"publication_date" => $this->getDateFr($obj->publication_date),
 						"categories" => Blog::getCategory()->getCategoryArticle()
 					]]);
 				}
@@ -124,7 +138,7 @@
 						"image" => $this->getImageArticle($obj->url),
 						"article" => $obj->article,
 						"pseudo" => $obj->pseudo,
-						"publication_date" => DateHeure::date_fr_texte($obj->publication_date),
+						"publication_date" => $this->getDateFr($obj->publication_date),
 						"categories" => Blog::getCategory()->getCategoryArticle($obj->url)
 					];
 				}
