@@ -9,7 +9,7 @@
 		{% endfor %}
 	</ul>
 	
-	{{ blog.article.article }}
+	{{ blog.article.article|raw }}
 </article>
 
 {% if blog.categories_list is iterable %}

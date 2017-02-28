@@ -42,6 +42,12 @@
 			return $jour_d." ".$mois[$mois_d - 1]." ".$annee_d;
 		}
 		
+		private function getExtract($article) {
+			$article = substr(strip_tags($article), 0, 150)."...";
+			
+			return $article;
+		}
+		
 		/**
 		 * this function get last articles
 		 */
@@ -65,7 +71,7 @@
 						"title" => $obj->title,
 						"url" => $obj->url,
 						"image" => $this->getImageArticle($obj->url),
-						"article" => $obj->article,
+						"article" => $this->getExtract($obj->article),
 						"pseudo" => $obj->pseudo,
 						"publication_date" => $this->getDateFr($obj->publication_date),
 						"categories" => Blog::getCategory()->getCategoryArticle($obj->url)
@@ -92,6 +98,8 @@
 			
 			if ((is_array($query)) && (count($query) == 1)) {
 				foreach ($query as $obj) {
+					$this->getExtract($obj->article);
+					
 					Blog::setValues(["article" => [
 						"id_article" => $obj->ID_article,
 						"title" => $obj->title,
@@ -136,7 +144,7 @@
 						"title" => $obj->title,
 						"url" => $obj->url,
 						"image" => $this->getImageArticle($obj->url),
-						"article" => $obj->article,
+						"article" => $this->getExtract($obj->article),
 						"pseudo" => $obj->pseudo,
 						"publication_date" => $this->getDateFr($obj->publication_date),
 						"categories" => Blog::getCategory()->getCategoryArticle($obj->url)

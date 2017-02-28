@@ -11,10 +11,11 @@
 			{% endfor %}
 		</ul>
 		
-		{{ i.article }}
+		{{ i.article|raw }}
 		
 		<a href="{{ WEBROOT }}blog/article/{{ i.url }}">Lire la suite</a>
 	</article>
+	<br><br><br><br><br>
 {% endfor %}
 
 {% if blog.categories_list is iterable %}
