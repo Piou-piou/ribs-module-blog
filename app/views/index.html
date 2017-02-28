@@ -7,7 +7,7 @@
 		
 		<ul>
 			{% for x in i.categories %}
-				<li><a href="{{ WEBROOT }}blog/category/{{ x.category }}">{{ x.category }}</a></li>
+				<li><a href="{{ WEBROOT }}blog/category/{{ x.url_category }}">{{ x.category }}</a></li>
 			{% endfor %}
 		</ul>
 		
@@ -15,14 +15,13 @@
 		
 		<a href="{{ WEBROOT }}blog/article/{{ i.url }}">Lire la suite</a>
 	</article>
-	<br><br><br><br><br>
 {% endfor %}
 
 {% if blog.categories_list is iterable %}
 	<h3>Categories list</h3>
 	<ul>
 		{% for i in blog.categories_list %}
-			<li><a href="{{ WEBROOT }}blog/category/{{ i.category }}">{{ i.category }}</a></li>
+			<li><a href="{{ WEBROOT }}blog/category/{{ i.url_category }}">{{ i.category }}</a></li>
 		{% endfor %}
 	</ul>
 {% endif %}

@@ -18,7 +18,8 @@
 				
 				foreach ($query as $obj) {
 					$categories[] = [
-						"category" => $obj->category
+						"category" => $obj->category,
+						"url_category" => $obj->url_category
 					];
 				}
 				
@@ -54,7 +55,8 @@
 				foreach ($query as $obj) {
 					$categories[] = [
 						"id_category" => $obj->ID_category,
-						"category" => $obj->category
+						"category" => $obj->category,
+						"url_category" => $obj->url_category
 					];
 				}
 				
