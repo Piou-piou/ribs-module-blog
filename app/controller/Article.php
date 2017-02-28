@@ -3,6 +3,8 @@
 	
 	
 	use core\App;
+	use core\functions\ChaineCaractere;
+	use core\functions\DateHeure;
 	
 	class Article {
 		
@@ -51,7 +53,7 @@
 						"image" => $this->getImageArticle($obj->url),
 						"article" => $obj->article,
 						"pseudo" => $obj->pseudo,
-						"publication_date" => $obj->publication_date,
+						"publication_date" => DateHeure::date_fr_texte($obj->publication_date),
 						"categories" => Blog::getCategory()->getCategoryArticle($obj->url)
 					];
 				}
@@ -84,7 +86,7 @@
 						"pseudo" => $obj->pseudo,
 						"id_state" => $obj->ID_state,
 						"state" => $obj->state,
-						"publication_date" => $obj->publication_date,
+						"publication_date" => DateHeure::date_fr_texte($obj->publication_date),
 						"categories" => Blog::getCategory()->getCategoryArticle()
 					]]);
 				}
@@ -122,7 +124,7 @@
 						"image" => $this->getImageArticle($obj->url),
 						"article" => $obj->article,
 						"pseudo" => $obj->pseudo,
-						"publication_date" => $obj->publication_date,
+						"publication_date" => DateHeure::date_fr_texte($obj->publication_date),
 						"categories" => Blog::getCategory()->getCategoryArticle($obj->url)
 					];
 				}

@@ -4,6 +4,7 @@
 	
 	use core\App;
 	use core\functions\ChaineCaractere;
+	use core\functions\DateHeure;
 	use core\HTML\flashmessage\FlashMessage;
 	use Intervention\Image\ImageManager;
 	use modules\blog\app\controller\Article;
@@ -114,7 +115,7 @@
 						"image" => $this->getImageArticle($obj->url),
 						"article" => $obj->article,
 						"pseudo" => $obj->pseudo,
-						"publication_date" => $obj->publication_date,
+						"publication_date" => DateHeure::date_fr_texte($obj->publication_date),
 						"categories" => Blog::getCategory()->getCategoryArticle($obj->url)
 					];
 				}
