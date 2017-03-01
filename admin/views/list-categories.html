@@ -7,7 +7,7 @@
 				<div>
 					<p>{{ i.category }}</p>
 					<a href="">Modifier</a>
-					<a href="">Supprimer</a>
+					<a href="{{ ADMWEBROOT }}controller/modules/blog/category/delete.php?id_category={{ i.id_category }}" class="open-popup" popup="popup-delete-category">Supprimer</a>
 				</div>
 			{% endfor %}
 		</div>

@@ -68,5 +68,16 @@
 			
 			$this->setCategoriesArticle($categories, $id_article);
 		}
+		
+		/**
+		 * @param $id_category
+		 * function that can delete an category and all article related to it
+		 */
+		public function setDeleteCategory($id_category) {
+			$dbc = App::getDb();
+			
+			$dbc->delete()->from("_blog_category")->where("ID_category", "=", $id_category)->del();
+			$dbc->delete()->from("_blog_article_category")->where("ID_category", "=", $id_category)->del();
+		}
 		//-------------------------- END SETTER ----------------------------------------------------------------------------//
 	}
