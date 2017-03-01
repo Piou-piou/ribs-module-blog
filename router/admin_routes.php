@@ -3,7 +3,8 @@
 		"index",
 		"add-article",
 		"edit-article",
-		"list-categories"
+		"list-categories",
+		"add-category"
 	];
 	
 	if (\core\modules\GestionModule::getModuleActiver("blog")) {

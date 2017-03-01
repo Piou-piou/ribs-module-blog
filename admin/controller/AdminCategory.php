@@ -3,6 +3,8 @@
 	
 	
 	use core\App;
+	use core\functions\ChaineCaractere;
+	use core\HTML\flashmessage\FlashMessage;
 	
 	class AdminCategory {
 		
@@ -38,6 +40,24 @@
 		
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
+		/**
+		 * @param $name
+		 * @return bool
+		 * function to add a category
+		 */
+		public function setAddCategory($name) {
+			$dbc = App::getDb();
+			
+			if ($this->getTestCategoryExist($name) !== false) {
+				FlashMessage::setFlash("Cette catégorie existe déjà, merci de changer de nom");
+				return false;
+			}
+			
+			$dbc->insert("category", $name)->insert("url_category", ChaineCaractere::setUrl($name))->into("_blog_category")->set();
+			FlashMessage::setFlash("Votre catégorie a été correctement ajoutée", "success");
+			return true;
+		}
+		
 		/**
 		 * @param $categories
 		 * @param $id_article

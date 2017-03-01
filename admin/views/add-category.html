@@ -1,0 +1,16 @@
+{% include("header.html") %}
+
+<form action="{{ ADMWEBROOT }}controller/modules/blog/category/add" method="post">
+    <input class="submit-contenu" type="submit" value="Ajouter la categorie">
+    
+    <div class="inner">
+        <section class="contenu modifier-contenu">
+            
+            <h2>Titre de l'article</h2>
+            <div class="bloc">
+                <label class="label" for="category"  data-error="Le titre de la catégorie doit être entre 4 et 20 caractères">Titre de la catégorie</label>
+                <input type="text" name="category" type-val="string" min="4" max="20" value="{{ category }}" required=""/>
+            </div>
+        </section>
+    </div>
+</form>
