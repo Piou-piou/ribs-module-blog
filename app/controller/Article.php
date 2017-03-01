@@ -116,7 +116,7 @@
 		}
 		
 		/**
-		 * function that get all article in one category
+		 * function that get all categories of an article
 		 */
 		public function getCategoryArticle() {
 			$dbc = App::getDb();
@@ -128,7 +128,7 @@
 				->from("_blog_article_category")
 				->from("identite")
 				->where("_blog_category.ID_category", "=", $category, "OR")
-				->where("_blog_category.url_category", "=", $category, "AND")
+				->where("_blog_category.category", "=", $category, "AND")
 				->where("_blog_article.ID_state", "=", 1, "AND")
 				->where("_blog_article_category.ID_article", "=", "_blog_article.ID_article", "AND", true)
 				->where("_blog_article_category.ID_category", "=", "_blog_category.ID_category", "AND", true)

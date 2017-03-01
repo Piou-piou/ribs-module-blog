@@ -82,6 +82,21 @@
 		}
 		
 		/**
+		 * @param $id_article
+		 * @return mixed
+		 * function that get url of an article
+		 */
+		private function getUrl($id_article) {
+			$dbc = App::getDb();
+			
+			$query = $dbc->select("url")->from("_blog_article")->where("ID_article", "=", $id_article)->get();
+			
+			foreach ($query as $obj) {
+				return $obj->url;
+			}
+		}
+		
+		/**
 		 * this function get last articles
 		 */
 		public function getAllArticle($id_state = null) {
@@ -208,6 +223,22 @@
 			
 			AdminBlog::getAdminCategory()->setUpdateCategoriesArticle($categories, $id_article);
 			return true;
+		}
+		
+		/**
+		 * @param $id_article
+		 * function that is used to delete an article
+		 */
+		public function setDeleteArticle($id_article) {
+			$dbc = App::getDb();
+			
+			if ($this->getTestArticleExist($id_article) == true) {
+				unlink(ROOT."modules/blog/images/".$this->getUrl($id_article).".png");
+				
+				$dbc->delete()->from("_blog_article")->where("ID_article", "=", $id_article)->del();
+			}
+			
+			FlashMessage::setFlash("Votre message a bien été supprimé", "success");
 		}
 		//-------------------------- END SETTER ----------------------------------------------------------------------------//
 	}

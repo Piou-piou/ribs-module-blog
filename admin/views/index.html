@@ -33,7 +33,7 @@
 				
 				<a class="modifier" href="{{ ADMWEBROOT }}modules/blog/edit-article/{{ i.url }}">Modifier l'article</a>
 				{#<a class="commentaire" href="{{ ADMWEBROOT }}modules/blog/edit-article/{{ i.url }}">Gestion commentaires</a>#}
-				<a class="supprimer" href="">Supprimer l'article</a>
+				<a class="supprimer open-popup" popup="popup-delete" href="{{ ADMWEBROOT }}controller/modules/blog/article/delete.php?id_article={{ i.id_article }}">Supprimer l'article</a>
 			</div>
 		{% endfor %}
 	</div>

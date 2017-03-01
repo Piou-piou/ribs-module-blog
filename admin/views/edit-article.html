@@ -1,7 +1,8 @@
 {% include("header.html") %}
 
 <form action="{{ ADMWEBROOT }}controller/modules/blog/article/edit" method="post">
-	<input class="submit-contenu" type="submit" value="Modifier l'article">
+	<button class="submit-contenu" type="submit">Modifier</button>
+	<button class="submit-contenu supprimer-page supprimer open-popup" popup="popup-delete" href="{{ ADMWEBROOT }}controller/modules/blog/article/delete.php?id_article={{ blog.article.id_article }}">Supprimer l'article</button>
 	
 	<div class="inner">
 		<section class="contenu modifier-contenu">
