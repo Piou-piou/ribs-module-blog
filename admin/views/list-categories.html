@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>$Title$</title>
-    </head>
-    <body>
-        $END$
-    </body>
-</html>
+{% include("header.html") %}
+
+<div class="inner">
+	<section class="contenu modifier-contenu added-module">
+		<div class="liste-element">
+			{% for i in blog.categories_list %}
+				<div>
+					<p>{{ i.category }}</p>
+					<a href="">Modifier</a>
+					<a href="">Supprimer</a>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="clear"></div>
+	</section>
+</div>

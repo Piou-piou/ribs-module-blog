@@ -3,7 +3,7 @@
 		"index",
 		"add-article",
 		"edit-article",
-		"category"
+		"list-categories"
 	];
 	
 	if (\core\modules\GestionModule::getModuleActiver("blog")) {
@@ -12,6 +12,7 @@
 			header("location:".ADMWEBROOT);
 		}
 		
+		//for articles pages
 		if ($this->page == "index") {
 			$this->controller = "blog/admin/controller/initialise/index.php";
 		}
@@ -22,6 +23,12 @@
 		}
 		
 		if ($this->page == "add-article") {
+			$this->controller = "blog/admin/controller/initialise/get_list_categories.php";
+		}
+		
+		
+		//for categories pages
+		if ($this->page == "list-categories") {
 			$this->controller = "blog/admin/controller/initialise/get_list_categories.php";
 		}
 	}

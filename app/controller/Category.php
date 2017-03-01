@@ -18,6 +18,7 @@
 				
 				foreach ($query as $obj) {
 					$categories[] = [
+						"id_category" => $obj->ID_category,
 						"category" => $obj->category,
 						"url_category" => $obj->url_category
 					];
