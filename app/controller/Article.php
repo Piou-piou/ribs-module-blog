@@ -60,6 +60,7 @@
 				->from("identite")
 				->where("_blog_article.ID_state", "=", 1, "AND")
 				->where("_blog_article.ID_identite", "=", "identite.ID_identite", "", true)
+				->orderBy("publication_date", "DESC")
 				->limit(0, $nb_article)->get();
 			
 			if ((is_array($query)) && (count($query) > 0)) {
@@ -133,6 +134,7 @@
 				->where("_blog_article_category.ID_article", "=", "_blog_article.ID_article", "AND", true)
 				->where("_blog_article_category.ID_category", "=", "_blog_category.ID_category", "AND", true)
 				->where("_blog_article.ID_identite", "=", "identite.ID_identite", "", true)
+				->orderBy("publication_date", "DESC")
 				->get();
 			
 			if ((is_array($query)) && (count($query) > 0)) {
