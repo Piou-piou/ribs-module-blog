@@ -29,11 +29,17 @@
 				<h2>{{ i.title }}</h2>
 				<h3>{{ i.publication_date }} par {{ i.pseudo }}</h3>
 				
+				<h4>Etat de l'article : {{ i.state }}</h4>
+				
 				{#<h4><i class="fa fa-comments animated activate swing infinite"></i>20commentaires</h4>#}
 				
 				<a class="modifier" href="{{ ADMWEBROOT }}modules/blog/edit-article/{{ i.url }}">Modifier l'article</a>
 				{#<a class="commentaire" href="{{ ADMWEBROOT }}modules/blog/edit-article/{{ i.url }}">Gestion commentaires</a>#}
-				<a class="supprimer open-popup" popup="popup-delete" href="{{ ADMWEBROOT }}controller/modules/blog/article/delete.php?id_article={{ i.id_article }}">Supprimer l'article</a>
+				{% if i.id_state == 4 %}
+					<a class="supprimer open-popup" popup="popup-delete-article" href="{{ ADMWEBROOT }}controller/modules/blog/article/delete.php?id_article={{ i.id_article }}">Supprimer l'article</a>
+				{% else %}
+					<a class="supprimer open-popup" popup="popup-trash-article" href="{{ ADMWEBROOT }}controller/modules/blog/article/add_trash.php?id_article={{ i.id_article }}">Archiver l'article</a>
+				{% endif %}
 			</div>
 		{% endfor %}
 	</div>

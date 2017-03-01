@@ -105,16 +105,22 @@
 			if ($id_state === null) {
 				$query = $dbc->select()
 					->from("_blog_article")
+					->from("_blog_state")
 					->from("identite")
-					->where("_blog_article.ID_identite", "=", "identite.ID_identite", "", true)
+					->where("_blog_article.ID_identite", "=", "identite.ID_identite", "AND", true)
+					->where("_blog_article.ID_state", "=", "_blog_state.ID_state", "", true)
+					->orderBy("publication_date", "DESC")
 					->get();
 			}
 			else {
 				$query = $dbc->select()
 					->from("_blog_article")
+					->from("_blog_state")
 					->from("identite")
 					->where("_blog_article.ID_state", "=", $id_state, "AND")
-					->where("_blog_article.ID_identite", "=", "identite.ID_identite", "", true)
+					->where("_blog_article.ID_identite", "=", "identite.ID_identite", "AND", true)
+					->where("_blog_article.ID_state", "=", "_blog_state.ID_state", "", true)
+					->orderBy("publication_date", "DESC")
 					->get();
 			}
 			
@@ -128,6 +134,8 @@
 						"url" => $obj->url,
 						"image" => $this->getImageArticle($obj->url),
 						"article" => $obj->article,
+						"id_state" => $obj->ID_state,
+						"state" => $obj->state,
 						"pseudo" => $obj->pseudo,
 						"publication_date" => $this->getDateFr($obj->publication_date),
 						"categories" => Blog::getCategory()->getCategoryArticle($obj->url)
@@ -213,7 +221,6 @@
 			
 			$dbc->update("title", $title)
 				->update("url", ChaineCaractere::setUrl($title))
-				->update("publication_date", date("Y-m-d H:i:s"))
 				->update("article", $article)
 				->update("ID_identite", $_SESSION['idlogin'.CLEF_SITE])
 				->update("ID_state", $state)
@@ -223,6 +230,20 @@
 			
 			AdminBlog::getAdminCategory()->setUpdateCategoriesArticle($categories, $id_article);
 			return true;
+		}
+		
+		/**
+		 * @param $id_article
+		 * function that is used to delete an article
+		 */
+		public function setTrashArticle($id_article) {
+			$dbc = App::getDb();
+			
+			if ($this->getTestArticleExist($id_article) == true) {
+				$dbc->update("ID_state", 4)->from("_blog_article")->where("ID_article", "=", $id_article)->set();
+			}
+			
+			FlashMessage::setFlash("Votre message a bien été archivé", "success");
 		}
 		
 		/**
