@@ -5,6 +5,7 @@
 	use core\App;
 	use core\functions\ChaineCaractere;
 	use core\HTML\flashmessage\FlashMessage;
+	use modules\blog\app\controller\Blog;
 	
 	class AdminCategory {
 		
@@ -19,13 +20,20 @@
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		/**
 		 * @param $name
+		 * @param null $id
 		 * @return bool
 		 * test if a category exist
 		 */
-		private function getTestCategoryExist($name) {
+		private function getTestCategoryExist($name, $id=null) {
 			$dbc = App::getDb();
 			
-			$query = $dbc->select()->from("_blog_category")->where("category", "=", $name)->get();
+			if ($id === null) {
+				$query = $dbc->select()->from("_blog_category")->where("category", "=", $name)->get();
+			}
+			else {
+				$query = $dbc->select()->from("_blog_category")
+					->where("category", "=", $name, "AND")->where("ID_category", "!=", $id)->get();
+			}
 			
 			if (count($query) > 0) {
 				foreach ($query as $obj) {
@@ -35,6 +43,26 @@
 			}
 			
 			return false;
+		}
+		
+		/**
+		 * function t get name of a category with it url
+		 */
+		public function getNameCategoryUrl() {
+			$dbc = App::getDb();
+			
+			$query = $dbc->select()->from("_blog_category")->where("url_category", "=", Blog::$router_parameter)->get();
+			
+			if (count($query) == 1) {
+				foreach ($query as $obj) {
+					Blog::setValues([
+						"category_name" => $obj->category,
+						"id_category" => $obj->ID_category
+					]);
+				}
+				
+				return $obj->category;
+			}
 		}
 		//-------------------------- END GETTER ----------------------------------------------------------------------------//
 		
@@ -54,6 +82,27 @@
 			}
 			
 			$dbc->insert("category", $name)->insert("url_category", ChaineCaractere::setUrl($name))->into("_blog_category")->set();
+			FlashMessage::setFlash("Votre catégorie a été correctement ajoutée", "success");
+			return true;
+		}
+		
+		/**
+		 * @param $name
+		 * @param $id
+		 * @return bool
+		 * function to edit the name of a category
+		 */
+		public function setEditCategory($name, $id) {
+			$dbc = App::getDb();
+			
+			if ($this->getTestCategoryExist($name, $id) !== false) {
+				FlashMessage::setFlash("Cette catégorie existe déjà, merci de changer de nom");
+				return false;
+			}
+			
+			$dbc->update("category", $name)->update("url_category", ChaineCaractere::setUrl($name))
+				->from("_blog_category")->where("ID_category", "=", $id)->set();
+			
 			FlashMessage::setFlash("Votre catégorie a été correctement ajoutée", "success");
 			return true;
 		}
