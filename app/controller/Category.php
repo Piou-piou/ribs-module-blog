@@ -64,6 +64,17 @@
 				return $categories;
 			}
 		}
+		
+		public function getNamemCategorieUrl() {
+			$dbc = App::getDb();
+			$url_category = Blog::$router_parameter;
+			
+			$query = $dbc->select("category")->from("_blog_category")->where("url_category", "=", $url_category)->get();
+			
+			foreach ($query as $obj) {
+				return $obj->category;
+			}
+		}
 		//-------------------------- END GETTER ----------------------------------------------------------------------------//
 		
 		
