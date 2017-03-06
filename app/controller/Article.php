@@ -106,6 +106,7 @@
 						"title" => $obj->title,
 						"url" => $obj->url,
 						"article" => $obj->article,
+						"extract" => $this->getExtract($obj->article),
 						"pseudo" => $obj->pseudo,
 						"id_state" => $obj->ID_state,
 						"state" => $obj->state,

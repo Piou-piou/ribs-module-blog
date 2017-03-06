@@ -6,3 +6,6 @@
 	$category->getCategoryArticle();
 	
 	$arr = \modules\blog\app\controller\Blog::getValues();
+	
+	\core\App::setTitle(" ".$arr["blog"]["article"]["title"]);
+	\core\App::setDescription("". $arr["blog"]["article"]["title"]);
