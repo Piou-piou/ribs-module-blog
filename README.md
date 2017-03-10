@@ -15,3 +15,12 @@ List of functionnalities of blog V1.0 :
 * add / edit / delete an article
 * add / edit / delete a category
 * add / edit the state of an article
+
+## Install
+
+You can install it with composer with this command : 
+```
+$ composer create-project piou-piou/ribs-module-blog blog
+```
+
+Before install it, you must be in modules folder of your ribs project
