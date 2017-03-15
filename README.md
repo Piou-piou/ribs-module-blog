@@ -2,7 +2,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Piou-piou/ribs-module-blog/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Piou-piou/ribs-module-blog/?branch=master)
 
 # ribs-module-blog
-This a blog module wich it run under Ribs-framework 2.3.5.6 and more
+This a blog module wich it run under Ribs-framework all version
 
 List of functionnalities of blog V1.0 : 
 
