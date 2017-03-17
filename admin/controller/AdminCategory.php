@@ -118,7 +118,7 @@
 			$count = count($categories);
 			if ((is_array($categories)) && ($count > 0)) {
 				for ($i=0 ; $i<$count ; $i++) {
-					if ($this->getTestCategoryExist($categories[$i]) != false) {
+					if ($this->getTestCategoryExist($categories[$i]) !== false) {
 						$dbc->insert("ID_category", $this->getTestCategoryExist($categories[$i]))->insert("ID_article", $id_article)->into("_blog_article_category")->set();
 					}
 				}
