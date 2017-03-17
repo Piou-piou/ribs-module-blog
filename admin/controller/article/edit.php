@@ -1,7 +1,7 @@
 <?php
 	$article = new \modules\blog\admin\controller\AdminArticle();
 	
-	if ($article->setEditArticle($_POST['title'], $_POST['categories'], $_POST['article'], $_POST['state'], $_POST['id_article']) == false) {
+	if ($article->setEditArticle($_POST['title'], $_POST['categories'], $_POST['article'], $_POST['state'], $_POST['id_article']) === false) {
 		$_SESSION['title'] = $_POST['title'];
 		$_SESSION['article'] = $_POST['article'];
 		
