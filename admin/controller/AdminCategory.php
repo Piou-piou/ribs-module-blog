@@ -59,9 +59,9 @@
 						"category_name" => $obj->category,
 						"id_category" => $obj->ID_category
 					]);
+					
+					return $obj->category;
 				}
-				
-				return $obj->category;
 			}
 		}
 		//-------------------------- END GETTER ----------------------------------------------------------------------------//

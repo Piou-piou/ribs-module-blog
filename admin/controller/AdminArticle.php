@@ -56,7 +56,7 @@
 		 * function that verify if article is ok
 		 */
 		private function getTestArticle($article) {
-			if (ChaineCaractere::testMinLenght($article, 10) == false) {
+			if (ChaineCaractere::testMinLenght($article, 10) === false) {
 				$this->error_article = "votre article doit être supérieur à 10 caractères";
 				return false;
 			}
@@ -177,7 +177,7 @@
 		public function setAddArticle($title, $categories, $article, $state) {
 			$dbc = App::getDb();
 			
-			if ($this->getTestTitle($title) == false || $this->getTestArticle($article) == false) {
+			if ($this->getTestTitle($title) === false || $this->getTestArticle($article) === false) {
 				FlashMessage::setFlash($this->error_title.$this->error_article);
 				return false;
 			}
@@ -209,12 +209,12 @@
 		public function setEditArticle($title, $categories, $article, $state, $id_article) {
 			$dbc = App::getDb();
 			
-			if ($this->getTestTitle($title, $id_article) == false || $this->getTestArticle($article) == false) {
+			if ($this->getTestTitle($title, $id_article) === false || $this->getTestArticle($article) === false) {
 				FlashMessage::setFlash($this->error_title.$this->error_article);
 				return false;
 			}
 			
-			if ($this->getTestArticleExist($id_article) == false) {
+			if ($this->getTestArticleExist($id_article) === false) {
 				FlashMessage::setFlash("votre article n'existe pas");
 				return false;
 			}
@@ -239,7 +239,7 @@
 		public function setTrashArticle($id_article) {
 			$dbc = App::getDb();
 			
-			if ($this->getTestArticleExist($id_article) == true) {
+			if ($this->getTestArticleExist($id_article) === true) {
 				$dbc->update("ID_state", 4)->from("_blog_article")->where("ID_article", "=", $id_article)->set();
 			}
 			
@@ -253,7 +253,7 @@
 		public function setDeleteArticle($id_article) {
 			$dbc = App::getDb();
 			
-			if ($this->getTestArticleExist($id_article) == true) {
+			if ($this->getTestArticleExist($id_article) === true) {
 				unlink(ROOT."modules/blog/images/".$this->getUrl($id_article).".png");
 				
 				$dbc->delete()->from("_blog_article")->where("ID_article", "=", $id_article)->del();
