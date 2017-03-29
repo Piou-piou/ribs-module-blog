@@ -13,6 +13,6 @@
 		
 		\core\HTML\flashmessage\FlashMessage::setFlash("Votre article a été correctement ajouté", "success");
 		
-		header("location:".ADMWEBROOT."modules/blog");
+		header("location:".ADMWEBROOT."modules/blog/index");
 	}
 	

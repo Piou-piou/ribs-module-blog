@@ -3,4 +3,4 @@
 	
 	$article->setTrashArticle($_GET['id_article']);
 	
-	header("location:".ADMWEBROOT."modules/blog");
+	header("location:".ADMWEBROOT."modules/blog/index");
